@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<title>{% block title %}Welcome{% endblock %}</title>
+</head>
+<body>
+
+<h1>Book List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID Book</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Date Published</th>
+    <th>Number of Pages</th>
+    <th>Type of Book</th>
+    <th>Edit</th>
+  </tr>
+  </thead>
+    <tbody>
+    {% for row in showBooksData %}
+        <tr>
+            <td>{{row.idBook}}</td>
+            <td>{{row.title}}</td>
+            <td>{{row.author}}</td>
+            <td>{{row.datePublished}}</td>
+            <td>{{row.numberOfPages}}</td>
+            <td>{{row.typeOfBook}}</td>
+            <td><a href="{% url 'book_update' row.idBook %}">Update</a>
+                <a href="{% url 'book_delete' row.idBook %}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br>
+<a href="{% url 'book_insert' %}">Add New Book</a>
+
+</body>
+</html>
